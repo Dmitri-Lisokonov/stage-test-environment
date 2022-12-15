@@ -28,20 +28,6 @@ services:
       - "8086:8086"
     environment:
       - INFLUXDB_DB=k6
-  postgres:
-    hostname: postgres
-    container_name: postgres
-    image: postgres:latest
-    networks: 
-    - one
-    ports:
-      - 5432:5432
-    environment:
-      - POSTGRES_USER=SA
-      - POSTGRES_PASSWORD=Password12!
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    restart: always
   elasticsearch:
     container_name: elasticsearch
     hostname: elasticsearch
@@ -74,7 +60,6 @@ volumes:
   rabbitmq_data:
   elasticsearch_data:
   kibana_data:
-  postgres_data:
   mongodb_data:
 
 

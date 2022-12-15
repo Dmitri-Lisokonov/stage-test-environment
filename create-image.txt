@@ -1,0 +1,4 @@
+# From root directory run:
+dotnet publish -c Production ./backend/src/Telbase.NumberGenerators.Api/
+docker build -f ./.docker/Api.Dockerfile backend/src/Telbase.NumberGenerators.Api/bin/Production/net6.0/publish/ -t numbergenerators_api
+docker run numbergenerators_api
