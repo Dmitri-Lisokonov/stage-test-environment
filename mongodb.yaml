@@ -1,0 +1,80 @@
+networks:
+  one:
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: SA
+      MONGO_INITDB_ROOT_PASSWORD: Password12!
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data:/data/db
+  numbergenerators:
+    image: numbergenerators_api:latest
+    container_name: api
+    networks: 
+    - one
+    ports:
+      - 7777:80
+  influxdb:
+    image: influxdb:1.8
+    container_name: influxdb
+    networks: 
+    - one
+    ports:
+      - "8086:8086"
+    environment:
+      - INFLUXDB_DB=k6
+  postgres:
+    hostname: postgres
+    container_name: postgres
+    image: postgres:latest
+    networks: 
+    - one
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=SA
+      - POSTGRES_PASSWORD=Password12!
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+  elasticsearch:
+    container_name: elasticsearch
+    hostname: elasticsearch
+    image: elasticsearch:7.17.0
+    networks: 
+    - one
+    ports: 
+      - 9200:9200
+      - 9300:9300
+    environment:
+      - "discovery.type=single-node"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    restart: always
+  kibana:
+    hostname: kibana
+    image: kibana:7.17.0
+    container_name: kibana
+    networks: 
+    - one
+    ports:
+      - 5601:5601
+    environment:
+      - "ELASTICSEARCH_URL=http://elasticsearch:9200"
+    volumes:
+      - kibana_data:/usr/share/kibana/data
+    restart: always
+volumes:
+  sqlserver_data:
+  rabbitmq_data:
+  elasticsearch_data:
+  kibana_data:
+  postgres_data:
+  mongodb_data:
+
+
