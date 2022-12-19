@@ -1,31 +1,32 @@
 version: '3'
 
 networks:
-  one:
+  test-environment:
 
 services:
   numbergenerators:
     image: numbergenerators_api:latest
     container_name: api
     networks: 
-    - one
+    - test-environment
     ports:
       - 7777:80
   influxdb:
-    image: influxdb:1.8
+    image: influxdb
     container_name: influxdb
-    networks: 
-    - one
+    restart: always
     ports:
-      - "8086:8086"
-    environment:
-      - INFLUXDB_DB=k6
+      - 8086:8086
+    networks:
+      - test-environment
+    volumes:
+      - influxdb-volume:/var/lib/influxdb
   postgres:
     hostname: postgres
     container_name: postgres
     image: postgres:latest
     networks: 
-    - one
+    - test-environment
     ports:
       - 5432:5432
     environment:
@@ -39,7 +40,7 @@ services:
     hostname: elasticsearch
     image: elasticsearch:7.17.0
     networks: 
-    - one
+    - test-environment
     ports: 
       - 9200:9200
       - 9300:9300
@@ -53,7 +54,7 @@ services:
     image: kibana:7.17.0
     container_name: kibana
     networks: 
-    - one
+    - test-environment
     ports:
       - 5601:5601
     environment:
@@ -67,5 +68,7 @@ volumes:
   elasticsearch_data:
   kibana_data:
   postgres_data:
+  influxdb-volume:
+    external: true
 
 
