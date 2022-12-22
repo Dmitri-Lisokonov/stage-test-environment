@@ -5,7 +5,7 @@ networks:
 
 services:
   numbergenerators:
-    image: numbergenerators_api_postgres:latest
+    image: numbergenerators_api_mongo:latest
     container_name: api
     networks: 
     - one
