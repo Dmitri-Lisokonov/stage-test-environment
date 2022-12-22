@@ -62,7 +62,7 @@ volumes:
   rabbitmq_data:
   elasticsearch_data:
   kibana_data:
-  postgres_data:
+  mongodb_data:
   influxdb_data:
     external: true
 
