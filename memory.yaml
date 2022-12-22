@@ -3,7 +3,7 @@ networks:
 
 services:
   numbergenerators:
-    image: numbergenerators_api_postgres:latest
+    image: numbergenerators_api_memory:latest
     container_name: api
     networks: 
     - one
@@ -18,16 +18,20 @@ services:
       - "8086:8086"
     environment:
       - INFLUXDB_DB=k6
-  mongodb:
-    image: mongo:latest
-    container_name: mongodb
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: SA
-      MONGO_INITDB_ROOT_PASSWORD: Password12!
+  postgres:
+    hostname: postgres
+    container_name: postgres
+    image: postgres:latest
+    networks: 
+    - one
     ports:
-      - 27017:27017
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=SA
+      - POSTGRES_PASSWORD=Password12!
     volumes:
-      - mongodb_data:/data/db
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
   elasticsearch:
     container_name: elasticsearch
     hostname: elasticsearch
@@ -63,4 +67,3 @@ volumes:
   postgres_data:
   influxdb_data:
     external: true
-
