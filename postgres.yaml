@@ -20,6 +20,8 @@ services:
       - "8086:8086"
     environment:
       - INFLUXDB_DB=k6
+    volumes:
+     - influxdb_data:/var/lib/influxdb 
   postgres:
     hostname: postgres
     container_name: postgres
@@ -63,10 +65,15 @@ services:
     restart: always
 volumes:
   sqlserver_data:
+    external: true
   rabbitmq_data:
+    external: true
   elasticsearch_data:
+    external: true
   kibana_data:
+    external: true
   postgres_data:
+    external: true
   influxdb_data:
     external: true
 
