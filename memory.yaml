@@ -67,34 +67,34 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      device: sda/sda1/sqlserver_data
+      device: dev/sda1/sqlserver_data
   rabbitmq_data:
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: sda/sda1/rabbitmq_data
+      device: dev/sda1/rabbitmq_data
   elasticsearch_data:
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: sda/sda1/elasticsearch_data
+      device: dev/sda1/elasticsearch_data
   kibana_data:
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: sda/sda1/kibana_data
+      device: dev/sda1/kibana_data
   postgres_data:
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: sda/sda1/postgres_data
+      device: dev/sda1/postgres_data
   influxdb_data:
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: sda/sda1/influxdb_data
+      device: dev/sda1/influxdb_data
