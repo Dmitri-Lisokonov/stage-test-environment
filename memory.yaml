@@ -21,7 +21,7 @@ services:
     environment:
       - INFLUXDB_DB=k6
     volumes:
-     - influxdb_data/var/lib/influxdb 
+     - influxdb_data:/var/lib/influxdb 
   postgres:
     hostname: postgres
     container_name: postgres
