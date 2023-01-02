@@ -98,4 +98,3 @@ volumes:
       o: bind
       type: none
       device: /sda/influxdb_data
-    external: true
