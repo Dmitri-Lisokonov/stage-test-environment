@@ -63,38 +63,14 @@ services:
     restart: always
 volumes:
   sqlserver_data:
-    driver: local
-    driver_opts:
-      o: bind
-      type: none
-      device: /datadisk/sqlserver_data
+    external: true
   rabbitmq_data:
-    driver: local
-    driver_opts:
-      o: bind
-      type: none
-      device: /datadisk/rabbitmq_data
+    external: true
   elasticsearch_data:
-    driver: local
-    driver_opts:
-      o: bind
-      type: none
-      device: /datadisk/elasticsearch_data
+    external: true
   kibana_data:
-    driver: local
-    driver_opts:
-      o: bind
-      type: none
-      device: /datadisk/kibana_data
+    external: true
   postgres_data:
-    driver: local
-    driver_opts:
-      o: bind
-      type: none
-      device: /datadisk/postgres_data
+    external: true
   influxdb_data:
-    driver: local
-    driver_opts:
-      o: bind
-      type: none
-      device: /datadisk/influxdb_data
+    external: true
